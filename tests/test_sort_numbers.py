@@ -6,11 +6,8 @@ from torch.utils.data.dataloader import DataLoader
 
 import pickle
 
-from mingpt.utils import set_seed
 from mingpt.model import GPT
 from mingpt.trainer import Trainer
-
-set_seed(3407)
 
 
 class SortNumbers(unittest.TestCase):
@@ -78,10 +75,6 @@ class SortNumbers(unittest.TestCase):
         self.assertEqual(5000, test_score)
 
 
-if __name__ == '__main__':
-    unittest.main()
-
-
 class SortDataset(Dataset):
     """
     Dataset for the Sort problem. E.g. for problem length 6:
@@ -99,7 +92,7 @@ class SortDataset(Dataset):
         self.num_digits = num_digits
 
     def __len__(self):
-        return 10000  # ...
+        return 10000
 
     def get_vocab_size(self):
         return self.num_digits
@@ -141,3 +134,7 @@ class SortDataset(Dataset):
         # we only want to predict at output locations, mask out the loss at the input locations
         y[:self.length - 1] = -1
         return x, y
+
+
+if __name__ == '__main__':
+    unittest.main()

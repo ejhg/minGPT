@@ -12,46 +12,6 @@ The minGPT library is three files: [mingpt/model.py](mingpt/model.py) contains t
 - `demo.ipynb` shows a minimal usage of the `GPT` and `Trainer` in a notebook format on a simple sorting example
 - `generate.ipynb` shows how one can load a pretrained GPT2 and generate text given some prompt
 
-### Library Installation
-
-If you want to `import mingpt` into your project:
-
-```
-git clone https://github.com/karpathy/minGPT.git
-cd minGPT
-pip install -e .
-```
-
-### Usage
-
-Here's how you'd instantiate a GPT-2 (124M param version):
-
-```python
-from mingpt.model import GPT
-model_config = GPT.get_default_config()
-model_config.model_type = 'gpt2'
-model_config.vocab_size = 50257 # openai's model vocabulary
-model_config.block_size = 1024  # openai's model block_size (i.e. input context length)
-model = GPT(model_config)
-```
-
-And here's how you'd train it:
-
-```python
-# your subclass of torch.utils.data.Dataset that emits example
-# torch LongTensor of lengths up to 1024, with integers from [0,50257)
-train_dataset = YourDataset()
-
-from mingpt.trainer import Trainer
-train_config = Trainer.get_default_config()
-train_config.learning_rate = 5e-4 # many possible options, see the file
-train_config.max_iters = 1000
-train_config.batch_size = 32
-trainer = Trainer(train_config, model, train_dataset)
-trainer.run()
-```
-
-See `demo.ipynb` for a more concrete example.
 
 ### Unit tests
 
