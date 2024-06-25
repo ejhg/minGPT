@@ -15,9 +15,8 @@ class Trainer:
     @staticmethod
     def get_default_config():
         C = CfgNode()
-        # device to train on
-        C.device = 'auto'
-        # dataloder parameters
+        C.device = None
+        # dataloader parameters
         C.num_workers = 4
         # optimizer parameters
         C.max_iters = None
@@ -36,7 +35,7 @@ class Trainer:
         self.callbacks = defaultdict(list)
 
         # determine the device we'll train on
-        if config.device == 'auto':
+        if config.device == None:
             self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
             self.device = 'mps' if torch.backends.mps.is_available() else 'cpu'
         else:
@@ -62,10 +61,8 @@ class Trainer:
     def run(self):
         model, config = self.model, self.config
 
-        # setup the optimizer
         self.optimizer = model.configure_optimizers(config)
 
-        # setup the dataloader
         train_loader = DataLoader(
             self.train_dataset,
             sampler=torch.utils.data.RandomSampler(self.train_dataset, replacement=True, num_samples=int(1e10)),
