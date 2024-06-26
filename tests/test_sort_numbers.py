@@ -17,7 +17,9 @@ class SortNumbers(unittest.TestCase):
         test_dataset = SortDataset('test')
 
         model_config = GPT.get_default_config()
-        model_config.model_type = 'gpt-nano'
+        model_config.n_layer = 3
+        model_config.n_head = 3
+        model_config.n_embd = 48
         model_config.vocab_size = train_dataset.get_vocab_size()
         model_config.block_size = train_dataset.get_block_size()
         model = GPT(model_config)

@@ -99,7 +99,9 @@ class TestAdder(unittest.TestCase):
         config.system = CfgNode()
         config.data = AdditionDataset.get_default_config()
         config.model = GPT.get_default_config()
-        config.model.model_type = 'gpt-nano'
+        config.model.n_layer = 3
+        config.model.n_head = 3
+        config.model.n_embd = 48
 
         print(config)
 

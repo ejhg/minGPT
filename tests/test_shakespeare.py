@@ -59,7 +59,9 @@ class TestAdder(unittest.TestCase):
         config.system = CfgNode()
 
         config.model = GPT.get_default_config()
-        config.model.model_type = 'gpt-mini'
+        config.model.n_layer = 6
+        config.model.n_head = 6
+        config.model.n_embd = 192
 
         print(config)
 
