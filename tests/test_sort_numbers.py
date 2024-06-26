@@ -6,7 +6,7 @@ from torch.utils.data.dataloader import DataLoader
 
 import pickle
 
-from mingpt.model import GPT
+from mingpt.model.gpt import GPT
 from mingpt.trainer import Trainer
 
 

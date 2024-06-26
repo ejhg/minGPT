@@ -8,7 +8,7 @@ import os
 import torch
 from torch.utils.data import Dataset
 
-from mingpt.model import GPT
+from mingpt.model.gpt import GPT
 from mingpt.trainer import Trainer
 from mingpt.utils import CfgNode
 
