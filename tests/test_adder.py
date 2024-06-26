@@ -117,13 +117,6 @@ class TestAdder(unittest.TestCase):
         train_config.max_iters = 2000
         trainer = Trainer(train_config, model, train_dataset)
 
-        def batch_end_callback(trainer):
-            if trainer.iter_num % 10 == 0:
-                print(f"iter_dt {trainer.iter_dt * 1000:.2f}ms,iter {trainer.iter_num},loss {trainer.loss.item():.5f}")
-
-        trainer.set_callback('on_batch_end', batch_end_callback)
-
-        # run the optimization
         trainer.run()
 
         # if ndigit=2 we can afford the whole train set

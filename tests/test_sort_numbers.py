@@ -30,14 +30,8 @@ class SortNumbers(unittest.TestCase):
         train_config.num_workers = 0
         trainer = Trainer(train_config, model, train_dataset)
 
-        def batch_end_callback(trainer):
-            if trainer.iter_num % 100 == 0:
-                print(f"iter_dt {trainer.iter_dt * 1000:.2f}ms,iter {trainer.iter_num},loss {trainer.loss.item():.5f}")
-
-        trainer.set_callback('on_batch_end', batch_end_callback)
         trainer.run()
 
-        # now let's perform some evaluation
         model.eval()
 
         def eval_split(trainer, split, max_batches):

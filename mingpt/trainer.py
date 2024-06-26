@@ -97,6 +97,10 @@ class Trainer:
             self.optimizer.step()
 
             self.trigger_callbacks('on_batch_end')
+
+            if self.iter_num % 10 == 0:
+                print(f"iter_dt {self.iter_dt * 1000:.2f}ms,iter {self.iter_num},loss {self.loss.item():.5f}")
+
             self.iter_num += 1
             tnow = time.time()
             self.iter_dt = tnow - self.iter_time
